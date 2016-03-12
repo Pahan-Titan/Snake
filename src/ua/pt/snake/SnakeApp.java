@@ -16,6 +16,9 @@ import javax.swing.JOptionPane;
 
 public class SnakeApp {
 
+	static String lvl;
+	static int SPEED;
+	
     public static void main(String[] args) {
         new SnakeApp().startGraphicInterface();
     }
@@ -24,7 +27,7 @@ public class SnakeApp {
         JFrame myWindow = new JFrame("Змейка меню");
         myWindow.setLayout(null);
         myWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        myWindow.setSize(270, 240);
+        myWindow.setSize(270, 290);
         myWindow.setVisible(true);
 
         final JButton GO = new JButton("Старт игры");
@@ -35,6 +38,7 @@ public class SnakeApp {
         GO.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent event) {
+            	SPEED = 410;
                 startGame();
             }
         });
@@ -53,8 +57,24 @@ public class SnakeApp {
             }
         });
 
+        final JButton Speed = new JButton("Сложность");
+        Speed.setLocation(30, 130);
+        Speed.setSize(200, 40);
+        myWindow.add(Speed);
+
+        Speed.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent event) {
+                JOptionPane s = new JOptionPane();
+                JDialog dialog = s.createDialog(null, "Сложность");
+                lvl = s.showInputDialog(null, "Введите ур. от 1 до 5", "Сложность", 1);
+                Lvl();
+                startGame();
+            }
+        });
+       
         final JButton exit = new JButton("Выход");
-        exit.setLocation(30, 130);
+        exit.setLocation(30, 180);
         exit.setSize(200, 40);
         myWindow.add(exit);
 
@@ -64,7 +84,16 @@ public class SnakeApp {
             }
         });
     }
-
+    
+    public static void Lvl() {
+    	int l = Integer.parseInt(lvl);
+    	if (l == 1) SPEED = 310;
+    	if (l == 2) SPEED = 350;
+    	if (l == 3) SPEED = 410;
+    	if (l == 4) SPEED = 450;
+    	else SPEED = 500;
+	}
+    
     public void startGame() {
         JDialog dlg = new JDialog((JFrame) null, "Змейка");
         dlg.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
