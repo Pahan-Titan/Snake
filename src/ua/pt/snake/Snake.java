@@ -85,8 +85,8 @@ public class Snake {
     }
 
 
-    public int getSpeed() {
-        return 410;
+    public static int getSpeed(int speed) {
+        return speed;
     }
 
 

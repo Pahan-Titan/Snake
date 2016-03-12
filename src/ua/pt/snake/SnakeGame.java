@@ -46,7 +46,7 @@ public class SnakeGame extends JPanel {
                 while (true) {
                     gameCycle();
                     try {
-                        Thread.sleep(550 - snake.getSpeed());
+                        Thread.sleep(550 - snake.getSpeed(SnakeApp.SPEED));
                     } catch (InterruptedException e) {
                     }
                 }
