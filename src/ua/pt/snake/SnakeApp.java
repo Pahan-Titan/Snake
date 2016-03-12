@@ -1,5 +1,7 @@
 package ua.pt.snake;
 
+import java.awt.HeadlessException;
+
 /************************************************************
  ** Title:  Игра змейка 
  ** Class:  SnakeApp
@@ -7,8 +9,8 @@ package ua.pt.snake;
  ************************************************************/
 
 
-//import game.highscores.HighscoreManager;
 import java.awt.event.*;
+import java.io.FileNotFoundException;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -53,8 +55,13 @@ public class SnakeApp {
         highscore.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent event) {
-//                game.highscores.HighscoreManager hm = new game.highscores.HighscoreManager();
-//                JOptionPane.showMessageDialog(highscore, hm.getHighscoreString(), "История", JOptionPane.WARNING_MESSAGE);
+                try {
+					JOptionPane.showMessageDialog(highscore, HighscoreManager.read(), "История", JOptionPane.WARNING_MESSAGE);
+				} catch (HeadlessException e) {
+					e.printStackTrace();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
             }
         });
 
@@ -131,12 +138,14 @@ public class SnakeApp {
                     String name = "Аноним";
                     JOptionPane k = new JOptionPane();
                     JDialog dialog = k.createDialog(null, "История");
-
-                   name = k.showInputDialog(null, "Ваше имя", "История", 1);
-//                   HighscoreManager hm = new HighscoreManager();
+                    name = k.showInputDialog(null, "Ваше имя", "История", 1);
                     if (name != null) {
-                        name = name + " ";
-//                        hm.addScore(name, sn.getPoints()); 
+                        name = name + "  -  ";
+                        try {
+							HighscoreManager.update(name + sn.getPoints());
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
+						}
                     }
                     event.getWindow().dispose();
 
