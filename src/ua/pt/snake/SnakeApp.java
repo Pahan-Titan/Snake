@@ -6,6 +6,7 @@ package ua.pt.snake;
  ** Notes: Класс окна игры змейка
  ************************************************************/
 
+
 //import game.highscores.HighscoreManager;
 import java.awt.event.*;
 import javax.swing.JButton;
@@ -87,11 +88,11 @@ public class SnakeApp {
     
     public static void Lvl() {
     	int l = Integer.parseInt(lvl);
-    	if (l == 1) SPEED = 310;
-    	if (l == 2) SPEED = 350;
+    	if (l == 1) SPEED = 340;
+    	if (l == 2) SPEED = 370;
     	if (l == 3) SPEED = 410;
     	if (l == 4) SPEED = 450;
-    	else SPEED = 500;
+    	if (l == 5) SPEED = 500;
 	}
     
     public void startGame() {
